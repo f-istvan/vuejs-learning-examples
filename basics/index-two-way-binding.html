@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VueJS</title>
+	<link rel="stylesheet" href="">
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<p>v-model tells vuejs to set-up two way data binding for this input</p>
+	<input type="text" v-model="name">
+  <p>{{ name }}</p>
+</div>
+<script>
+  new Vue({
+		el: '#app',
+		data: {
+		  name: 'Max'
+		}
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>VueJS</title>
+  <link rel="stylesheet" href="">
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <h3>{{ title }}</h3>
+  <button v-on:click="show" ref="myButton">Show</button>
+</div>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      title: 'Hello World!'
+    },
+    methods: {
+      show: function() {
+        this.updateTitle('The VueJS Instance (Updated)');
+        this.$refs.myButton.innerText = 'Test';
+      },
+      updateTitle: function(title) {
+        this.title = title
+      }
+    }
+  });
+
+  /** you can access and modify stuff from outside but it is not 'reflective' **/
+  /** not 'reflective' means VueJS does not know about the chage **/
+  /** VueJS creates its own templates, but these changes are not reflected to the template **/
+  vm.$refs.myButton.innerText = 'Updated from outside';
+
+  /** if we call show then VueJS will use its own template to set the title **/
+  setTimeout(function() {
+    vm.show();
+  }, 3000);
+</script>
+</body>
+</html>

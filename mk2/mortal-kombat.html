@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>Mortal Kombat</title>
+	<link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+	<link rel="stylesheet" href="mkcss.css">
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="app" class="bg">
+	<div class="fighters">
+		<div class="fighter-left">
+			<div class="fighter-text">
+				{{ leftHealth }}
+			</div>
+			<div class="fighter-left-pic"></div>
+			<div class="fighter-text">
+				sub-zero
+			</div>
+		</div>
+		<div class="fighter-right">
+			<div class="fighter-text">
+        {{ rightHealth }}
+			</div>
+			<div class="fighter-right-pic"></div>
+			<div class="fighter-text">
+				reptile
+			</div>
+		</div>
+	</div>
+	<div class="results">
+		<ul>
+			<li v-for="message in messages">{{ message }}</li>
+		</ul>
+	</div>
+	<div class="controls">
+		<button class="control new-game" v-show="!isGameOn" v-on:click="startGame">New Game</button>
+		<button class="control attack" v-show="isGameOn" v-on:click="attack">Attack</button>
+		<button class="control special-attack" v-show="isGameOn" v-on:click="specialAttack">Special Attack</button>
+		<button class="control heal" v-show="isGameOn" v-on:click="heal">Heal</button>
+		<button class="control give-up" v-show="isGameOn" v-on:click="giveUp">Give Up</button>
+	</div>
+</div>
+<script>
+  new Vue({
+		el: '#app',
+		data: {
+		  leftHealth: 100,
+		  rightHealth: 100,
+			isGameOn: false,
+			messages: []
+		},
+		methods: {
+      startGame: function () {
+			  this.isGameOn = !this.isGameOn;
+			  this.leftHealth = 100;
+			  this.rightHealth = 100;
+			  this.messages = [];
+			  this.messages.push('New game started!')
+      },
+      giveUp: function () {
+        this.isGameOn = !this.isGameOn;
+        this.messages.push('Played give up');
+      },
+			attack: function() {
+        let leftDamage = this.getAttackDamage();
+        let rightDamage = this.getAttackDamage();
+        this.handleAttack(leftDamage, rightDamage);
+			},
+      specialAttack: function() {
+        let leftDamage = this.getSpecialAttackDamage();
+        let rightDamage = this.getSpecialAttackDamage();
+        this.handleAttack(leftDamage, rightDamage);
+      },
+			heal: function() {
+        let heal = this.getHeal();
+        this.leftHealth += heal;
+        this.messages.push('Player healed by: ' + heal)
+        if (this.leftHealth > 100) {
+          this.leftHealth = 100;
+				}
+				let damage = this.getRandomBetween(0, 2);
+        this.handleAttack(damage, 0);
+				this.leftHealth -= damage;
+			},
+			handleAttack: function(leftDamage, rightDamage) {
+        this.leftHealth -= leftDamage;
+        this.rightHealth -= rightDamage;
+        this.messages.push('Player damaged by: ' + leftDamage);
+        this.messages.push('Opponent damaged by: ' + rightDamage);
+        if (this.leftHealth < this.rightHealth) {
+          if (this.leftHealth <= 0) {
+            // right won
+						this.rightHealth += rightDamage;
+            this.leftHealth = 0;
+          }
+				} else if (this.leftHealth > this.rightHealth) {
+          if (this.rightHealth <= 0) {
+            // left won
+            this.leftHealth += leftDamage;
+            this.rightHealth = 0;
+          }
+				} else {
+          // won't handle
+				}
+			},
+      getRandomBetween: function (min, max) {
+        return Math.floor(Math.random() * (max - min) ) + min;
+      },
+      getAttackDamage: function() {
+        return this.getRandomBetween(1, 10);
+      },
+			getSpecialAttackDamage: function() {
+        return this.getRandomBetween(11, 30);
+			},
+			getHeal: function() {
+        return this.getRandomBetween(1, 5);
+			}
+		}
+	});
+</script>
+</body>
+</html>

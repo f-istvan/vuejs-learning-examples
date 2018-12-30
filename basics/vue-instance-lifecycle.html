@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>VueJS</title>
+  <link rel="stylesheet" href="">
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <h3>{{ title1 }}</h3>
+  <h3>{{ title2 }}</h3>
+  <button v-on:click="updateText1">Update Text | changes only once</button>
+  <button v-on:click="updateText2">Update Text | changes every time we click it</button>
+  <button v-on:click="destroy">Destroy</button>
+</div>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      title1: 'hello world!',
+      title2: 'hello world!'
+    },
+    beforeCreate: function() {
+      console.log('beforeCreate()');
+    },
+    created: function() {
+      console.log('created()');
+    },
+    beforeMount: function() {
+      console.log('beforeMount()');
+    },
+    mounted: function() {
+      console.log('mounted()');
+    },
+
+    beforeUpdate: function() {
+      console.log('beforeUpdate()');
+    },
+    updated: function() {
+      console.log('updated()');
+    },
+    beforeDestroy: function() {
+      console.log('beforeDestroy()');
+    },
+    destroyed: function() {
+      console.log('destroyed()');
+    },
+    methods: {
+      /** no real change after second click **/
+      updateText1: function() {
+        this.title1 = 'Updated text';
+      },
+      updateText2: function() {
+        this.title2 = 'Updated text ' + Math.random();
+      },
+      destroy: function() {
+        this.$destroy();
+      }
+    }
+  });
+</script>
+</body>
+</html>

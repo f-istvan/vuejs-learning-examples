@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VueJS</title>
+	<link rel="stylesheet" href="">
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<p>
+		methods do NOT know about the data -> get executed every time when the page is re-rendered
+	</p>
+  <button v-on:click="counter++">Increase</button>
+	<button v-on:click="counter--">Decrease</button>
+	<button v-on:click="secondCounter++">Increase second</button>
+  <p>Counter: {{ counter }} | {{ secondCounter }}</p>
+	<p>Result: {{ result() }} | {{ output }}</p>
+</div>
+<script>
+  new Vue({
+		el: '#app',
+		data: {
+		  counter: 0,
+			secondCounter: 0
+		},
+    // computed knows that this.counter depends on it -> gets executed when 'Increase' or 'Decrease' is clicked
+		// computed knows that this.secondCounter does NOT depend on it -> does NOT get executed when 'Increase Second' is clicked
+		computed: {
+		  output: function() {
+		    console.log('Compted');
+		    return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+			}
+		},
+		// methods do NOT know about the data -> get executed every time when the page is re-rendered
+		methods: {
+      result: function() {
+        console.log('Method');
+        return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+      }
+    }
+	});
+</script>
+</body>
+</html>

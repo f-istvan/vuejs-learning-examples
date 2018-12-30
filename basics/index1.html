@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VueJS</title>
+	<link rel="stylesheet" href="">
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<h3 v-once>{{ title }} - v-once renders only once, than it wont change</h3>
+	<h3>{{ title }} - I dont use v-once here</h3>
+	<p>{{ sayHello() }}</p>
+
+	<p>No need for curly brackets because we use "v-" directive: <a v-bind:href="myLink">Google</a></p>
+	<p>v-bind means: bind my data here</p>
+
+	<p v-html="finishedLink"></p>
+</div>
+<script>
+  new Vue({
+		el: '#app',
+		data: {
+			title: 'Hello World!',
+      myLink: 'http://google.com',
+			finishedLink: '<a href="http://google.com">Google - Cross-site scripting (XSS) Warning</a>'
+		},
+		methods: {
+			sayHello: function() {
+			  this.title = "Hello";
+			  return this.title;
+			}
+		}
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("images/mkbg.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: auto;
+}
+
+.fighters {
+    height: 350px;
+    margin: 65px 100px 0 100px;
+}
+
+.fighter-text {
+    background-color: rgba(129, 30, 11, 0.35) ;
+    color: #F6F69C;
+    text-align: center;
+    font-family: 'Bungee', cursive;
+    border-radius: 16px;
+    height: 42px;
+    width: 200px;
+    font-size: 23px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.fighter-left, .fighter-right {
+    width: 200px;
+}
+
+.fighter-left {
+    float: left;
+}
+
+.fighter-left-pic {
+    background-image: url("images/sub-zero.jpg");
+}
+
+.fighter-right {
+    float: right;
+}
+
+.fighter-right-pic {
+    background-image: url("images/reptile.jpg");
+}
+
+.fighter-left-pic, .fighter-right-pic {
+    width: 200px;
+    height: 238px;
+    margin: 15px 0 15px 0;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: auto;
+    border-radius: 10px;
+}
+
+.results {
+    text-align: center;
+    min-height: 300px;
+    overflow: scroll;
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    background-color: rgba(129, 30, 11, 0.35) ;
+    color: #F6F69C;
+    text-align: center;
+    font-family: 'Bungee', cursive;
+    border-radius: 16px;
+    font-size: 12px;
+    vertical-align: middle;
+
+    margin: 1px auto 0px auto;
+    width: 50%;
+}
+
+.controls {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}

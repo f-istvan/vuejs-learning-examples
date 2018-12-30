@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VueJS</title>
+	<link rel="stylesheet" href="">
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<p>
+		methods do NOT know about the data -> get executed every time when the page is re-rendered
+	</p>
+  <button v-on:click="counter++">Increase</button>
+	<button v-on:click="counter--">Decrease</button>
+	<p>Result: {{ output }} | {{ counter }}</p>
+</div>
+<script>
+  new Vue({
+		el: '#app',
+		data: {
+		  counter: 0
+		},
+		// this is for sync operations (return should happen ASAP)
+		computed: {
+		  output: function() {
+		    console.log('Compted');
+		    return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+			}
+		},
+		// this is for async operations
+		// watch knows about that the counter is used -> going to run when page re-rendered
+		// the watcher is call whenever the counter changes
+		// we do not returning anything
+		watch: {
+		  counter: function(value) {
+		    let vm = this;
+		    setTimeout(function() {
+		      console.log('Reset Counter Watch Called')
+		      vm.counter = 0;
+				}, 2000);
+			}
+		}
+	});
+</script>
+</body>
+</html>
